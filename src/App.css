@@ -12,6 +12,8 @@ body {
   background-color: rgb(250, 230, 230);
 }
 .content {
+  width: 80vw;
+  position: relative;
   font-family: "Courier New", Courier, monospace;
 }
 .content h1 {
@@ -23,6 +25,10 @@ body {
   padding-left: 3vw;
   padding-top: 10px;
   font-size: 25px;
+}
+.users {
+  position: relative;
+  width: 100%;
 }
 .users .list-item {
   margin-left: 6vw;
@@ -42,4 +48,16 @@ body {
 .users .list-item p {
   margin: 0px;
   font-size: 20px;
+}
+.edit-form {
+  position: absolute;
+  right: 0px;
+  top: 10vh;
+  width: 30vw;
+  height: 75vh;
+  background-color: rgba(100, 205, 235, 0.1);
+  border-left: 4px solid rgba(100, 205, 235, 0.5)
+}
+.edit-form h1 {
+  margin:0px;
 }
