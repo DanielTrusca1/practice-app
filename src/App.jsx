@@ -8,6 +8,7 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import About from "./components/About";
 import Users from "./components/Users";
+import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -19,8 +20,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/users/:username" element={<Users/>} />
+          <Route path="/users/:username" element={<Users />} />
         </Routes>
+      </div>
+
+      <div className="modal-background">
+        <Modal />
       </div>
     </div>
   );

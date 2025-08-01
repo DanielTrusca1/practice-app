@@ -6,7 +6,7 @@ export const users = [
     },
     {
         name: "Daniel",
-        age: 20,
+        age: 19,
     },
     {
         name: "Kate",
