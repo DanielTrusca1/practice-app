@@ -4,6 +4,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 // Import UI components
+import Nav from "./components/Nav"
 import Home from './components/Home'
 import About from "./components/About"
 import Users from "./components/Users"
@@ -11,6 +12,9 @@ import Users from "./components/Users"
 function App() {
   return (
     <div className="App">
+
+      <Nav/>
+
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
