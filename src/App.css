@@ -1,26 +1,45 @@
 body {
-    margin: 0px;
+  margin: 0px;
 }
 .App {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .nav {
-    padding-top: 50px;
-    width: 20vw;
-    height: 100vh;
-    background-color: rgb(250, 230, 230);
+  padding-top: 50px;
+  width: 20vw;
+  height: 100vh;
+  background-color: rgb(250, 230, 230);
 }
 .content {
-    font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 .content h1 {
-    padding-left: 3vw;
-    padding-top: 50px;
-    font-size: 30px;
+  padding-left: 3vw;
+  padding-top: 50px;
+  font-size: 30px;
 }
 .content p {
-    padding-left: 3vw;
-    padding-top: 10px;
-    font-size: 25px;
+  padding-left: 3vw;
+  padding-top: 10px;
+  font-size: 25px;
+}
+.users .list-item {
+  margin-left: 6vw;
+  margin-bottom: 3vh;
+  width: 20vw;
+  height: 8vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: rgba(110, 210, 160, 0.5);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.users .list-item:hover {
+      background-color: rgba(110, 210, 160, 1);
+
+}
+.users .list-item p {
+  margin: 0px;
+  font-size: 20px;
 }
