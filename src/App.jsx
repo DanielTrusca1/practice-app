@@ -1,25 +1,26 @@
-import './App.css';
+import "./App.css";
 
 // React Router
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
 // Import UI components
-import Nav from "./components/Nav"
-import Home from './components/Home'
-import About from "./components/About"
-import Users from "./components/Users"
+import Nav from "./components/Nav";
+import Home from "./components/Home";
+import About from "./components/About";
+import Users from "./components/Users";
 
 function App() {
   return (
     <div className="App">
+      <Nav />
 
-      <Nav/>
-
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/users" element={<Users/>}/>
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/users" element={<Users />} />
+        </Routes>
+      </div>
     </div>
   );
 }

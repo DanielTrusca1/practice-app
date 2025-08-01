@@ -2,7 +2,12 @@ import React from 'react'
 
 const Users = () => {
   return (
-    <div>Users</div>
+    <div>
+      <h1>❯ Users</h1>
+      <p>
+        List of users: 
+      </p>
+    </div>
   )
 }
 

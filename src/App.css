@@ -11,3 +11,16 @@ body {
     height: 100vh;
     background-color: rgb(250, 230, 230);
 }
+.content {
+    font-family: 'Courier New', Courier, monospace;
+}
+.content h1 {
+    padding-left: 3vw;
+    padding-top: 50px;
+    font-size: 30px;
+}
+.content p {
+    padding-left: 3vw;
+    padding-top: 10px;
+    font-size: 25px;
+}
