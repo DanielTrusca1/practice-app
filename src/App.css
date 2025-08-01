@@ -6,6 +6,7 @@ body {
     flex-direction: row;
 }
 .nav {
+    padding-top: 50px;
     width: 20vw;
     height: 100vh;
     background-color: rgb(250, 230, 230);
