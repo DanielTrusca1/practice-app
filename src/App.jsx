@@ -10,7 +10,11 @@ import About from "./components/About";
 import Users from "./components/Users";
 import Modal from "./components/Modal";
 
+import { useContext } from "react";
+import { ModalContext } from "./contexts/ContextModal";
+
 function App() {
+  const { isModalActive } = useContext(ModalContext);
 
   return (
     <div className="App">
