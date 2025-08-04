@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ContextModal";
 
 const EditForm = ({ userData }) => {
+  const navigate = useNavigate();
+
   // Modal Context State
   const { setIsModalActive } = useContext(ModalContext);
 
@@ -13,8 +17,15 @@ const EditForm = ({ userData }) => {
 
   // Handle Close
   const handleClose = () => {
-    setIsModalActive(true);
-  }
+    // Open modal on data changed
+    if (userData.name != userName || userData.age != userAge) {
+      setIsModalActive(true);
+    } else {
+      navigate("/users");
+      // Refresh parent component
+      navigate(0);
+    }
+  };
 
   return (
     <div className="edit-form">

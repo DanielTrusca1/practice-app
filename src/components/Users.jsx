@@ -9,20 +9,17 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Users = () => {
   const navigate = useNavigate();
+  // User Edit Form refresh key
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const { username } = useParams();
 
   const [userData, setUserData] = useState(null);
 
-  // Run initial fetch in case username is already provided in URL
+  // Run initial fetch
   useEffect(() => {
-    if (username != null) {
-      // Search for user info in the mock data
-      const d = users.filter((u) => u.name == username)[0];
-
-      setUserData(d);
-    }
-  }, []);
+    setRefreshKey((prev) => prev + 1);
+  }, [userData]);
 
   const handleSelectUser = (username_arg) => {
     // Search for user info in the mock data
@@ -55,7 +52,7 @@ const Users = () => {
         })
       }
 
-      {userData != null && <EditForm userData={userData} />}
+      {userData != null && <EditForm key={refreshKey} userData={userData} />}
     </div>
   );
 };
