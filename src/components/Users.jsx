@@ -1,35 +1,19 @@
 import React, { useEffect } from "react";
 
+// Render child components of the nested routes
+import { Outlet } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+
 import { users } from "../MockData";
-
-import EditForm from "./EditForm";
-
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
 const Users = () => {
   const navigate = useNavigate();
-  // User Edit Form refresh key
-  const [refreshKey, setRefreshKey] = useState(0);
 
-  const { username } = useParams();
-
-  const [userData, setUserData] = useState(null);
-
-  // Run initial fetch
-  useEffect(() => {
-    setRefreshKey((prev) => prev + 1);
-  }, [userData]);
-
-  const handleSelectUser = (username_arg) => {
-    // Search for user info in the mock data
-    const d = users.filter((u) => u.name == username_arg)[0];
-
-    // Update selected user data state
-    setUserData(d);
-
+  const handleSelectUser = (usernameArg) => {
     // Navigate to the user profile edit form route
-    navigate(`/users/${username_arg}`);
+    navigate(`/users/${usernameArg}`);
+    navigate(0);
   };
 
   return (
@@ -51,8 +35,7 @@ const Users = () => {
           );
         })
       }
-
-      {userData != null && <EditForm key={refreshKey} userData={userData} />}
+      <Outlet />
     </div>
   );
 };

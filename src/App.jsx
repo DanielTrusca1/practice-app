@@ -12,6 +12,7 @@ import Modal from "./components/Modal";
 
 import { useContext } from "react";
 import { ModalContext } from "./contexts/ContextModal";
+import EditForm from "./components/EditForm";
 
 function App() {
   const { isModalActive } = useContext(ModalContext);
@@ -24,8 +25,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:username" element={<Users />} />
+          <Route path="/users" element={<Users />}>
+            <Route path=":username" element={<EditForm />} />
+          </Route>
         </Routes>
       </div>
 
