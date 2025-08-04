@@ -108,3 +108,18 @@ body {
   justify-content: center;
   gap: 0%;
 }
+.edit-form button {
+  position: absolute;
+  right: 2vw;
+  top: 4.5vh;
+  width: 2.5vw;
+  height: 2.5vw;
+  border: none;
+  border-radius: 40%;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 100, 100);
+  color: white;
+}

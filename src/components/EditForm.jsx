@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SmallButton } from "../reusable/SmallButton";
 
 const EditForm = ({ userData }) => {
   const [userName, setUserName] = useState(userData.name);
@@ -11,6 +12,7 @@ const EditForm = ({ userData }) => {
       <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
       <p>Age:</p>
       <input type="text" value={userAge} onChange={(e) => setUserAge(e.target.value)} />
+      <button>x</button>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Users from "./components/Users";
 import Modal from "./components/Modal";
 
 function App() {
+
   return (
     <div className="App">
       <Nav />
@@ -24,9 +25,11 @@ function App() {
         </Routes>
       </div>
 
-      <div className="modal-background">
-        <Modal />
-      </div>
+      {isModalActive && (
+        <div className="modal-background">
+          <Modal />
+        </div>
+      )}
     </div>
   );
 }
