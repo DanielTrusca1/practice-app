@@ -1,20 +1,42 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 
-// React Router
-import { BrowserRouter } from "react-router-dom";
+// React Router DOM
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { ModalProvider } from "./contexts/ContextModal";
+
+// Import UI components
+import App from "./App";
+import Home from "./components/Home";
+import About from "./components/About";
+import Users from "./components/Users";
+import EditForm from "./components/EditForm";
+import Modal from "./components/Modal";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />, // Root layout with Nav + content wrapper
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "about", element: <About /> },
+      {
+        path: "users",
+        element: <Users />,
+        children: [{ path: ":username", element: <EditForm /> }],
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ModalProvider>
-        <App />
-      </ModalProvider>
-    </BrowserRouter>
+    <ModalProvider>
+      <Modal />
+      <RouterProvider router={router} />
+    </ModalProvider>
   </React.StrictMode>
 );

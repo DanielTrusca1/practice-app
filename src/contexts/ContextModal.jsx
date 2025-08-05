@@ -1,15 +1,29 @@
-import { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const ModalContext = createContext();
 
-const ModalProvider = ({ children }) => {
-  const [isModalActive, setIsModalActive] = useState(false);
+export function ModalProvider({ children }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [pendingActions, setPendingActions] = useState({
+    proceed: null,
+    reset: null,
+  });
 
-  const value = { isModalActive, setIsModalActive };
+  const showModal = (proceed, reset) => {
+    setPendingActions({ proceed, reset });
+    setModalOpen(true);
+  };
+  const hideModal = () => {
+    setModalOpen(false);
+  };
 
   return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+    <ModalContext.Provider
+      value={{ modalOpen, pendingActions, showModal, hideModal }}
+    >
+      {children}
+    </ModalContext.Provider>
   );
-};
+}
 
-export { ModalContext, ModalProvider };
+export const useModal = () => useContext(ModalContext);

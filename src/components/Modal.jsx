@@ -1,36 +1,31 @@
 import { SmallButton } from "../reusable/SmallButton";
 
-import { useContext } from "react";
-import { ModalContext } from "../contexts/ContextModal";
-
-import { useNavigate } from "react-router-dom";
+import { useModal } from "../contexts/ContextModal";
 
 const Modal = () => {
-  const navigate = useNavigate();
-
   // Modal Context State
-  const { setIsModalActive } = useContext(ModalContext);
+  const { modalOpen, pendingAction, hideModal } = useModal();
 
-  // Handle Close
-  const handleClose = (shouldDiscard) => {
-    setIsModalActive(false);
+  if (!modalOpen) return null;
 
-    if (shouldDiscard == true) {
-      navigate("/users");
-      // Refresh parent component
-      navigate(0);
-    }
+  const onConfirm = () => {
+    // Actually navigate
+    pendingAction?.();
+    hideModal();
   };
+  const onCancel = () => hideModal();
 
   return (
-    <div className="confirmation-modal">
-      <p>You have unsaved changes to the user form.</p>
-      <p>Are you sure you want to discard the changes?</p>
-      <div className="row-flex-container">
-        <SmallButton onClick={() => handleClose(false)}>Cancel</SmallButton>
-        <SmallButton onClick={() => handleClose(true)} $variant="danger">
-          Don't Save
-        </SmallButton>
+    <div className="modal-background">
+      <div className="confirmation-modal">
+        <p>You have unsaved changes to the user form.</p>
+        <p>Are you sure you want to discard the changes?</p>
+        <div className="row-flex-container">
+          <SmallButton onClick={onCancel}>Cancel</SmallButton>
+          <SmallButton onClick={onConfirm} $variant="danger">
+            Don't Save
+          </SmallButton>
+        </div>
       </div>
     </div>
   );

@@ -2,24 +2,30 @@ import React, { useState, useEffect } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useContext } from "react";
-
-import { ModalContext } from "../contexts/ContextModal";
-
 import { users } from "../MockData";
+
+import { useModal } from "../contexts/ContextModal";
+import { useNavigationGuard } from "../hooks/useNavigationGuard.jsx";
 
 const EditForm = () => {
   const navigate = useNavigate();
 
+  // Get username from URI param
   const { username } = useParams();
-
-  // Modal Context State
-  const { setIsModalActive } = useContext(ModalContext);
 
   // User Form Data
   const [userData, setUserData] = useState(null);
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
+  const isDirty = userData && (userName !== userData.name || userAge !== userData.age);
+  const { showModal } = useModal();
+
+  useNavigationGuard(isDirty, ({ proceed, reset }) => {
+    showModal(
+      () => proceed(),
+      () => reset()
+    );
+  });
 
   // Get user data from username URI param
   useEffect(() => {
@@ -40,14 +46,7 @@ const EditForm = () => {
 
   // Handle Close
   const handleClose = () => {
-    // Open modal on data changed
-    if (userData.name !== userName || userData.age !== userAge) {
-      setIsModalActive(true);
-    } else {
-      navigate("/users");
-      // Refresh parent component
-      navigate(0);
-    }
+    navigate("/users");
   };
 
   return (
