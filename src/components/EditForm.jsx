@@ -17,10 +17,17 @@ const EditForm = () => {
   const [userData, setUserData] = useState(null);
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
-  const isDirty = userData && (userName !== userData.name || userAge !== userData.age);
+  const isDirty =
+    userData == null || userName === "" || userAge === ""
+      ? false
+      : userName != userData.name || userAge != String(userData.age);
+
+  console.log(userData, userName, userAge, isDirty)
+
   const { showModal } = useModal();
 
   useNavigationGuard(isDirty, ({ proceed, reset }) => {
+    console.log("Guarding");
     showModal(
       () => proceed(),
       () => reset()

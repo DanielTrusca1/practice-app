@@ -13,7 +13,6 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Users from "./components/Users";
 import EditForm from "./components/EditForm";
-import Modal from "./components/Modal";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +34,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ModalProvider>
-      <Modal />
-      <RouterProvider router={router} />
+      <RouterProvider router={router}></RouterProvider>
     </ModalProvider>
   </React.StrictMode>
 );

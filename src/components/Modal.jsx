@@ -2,7 +2,11 @@ import { SmallButton } from "../reusable/SmallButton";
 
 import { useModal } from "../contexts/ContextModal";
 
+import { useNavigate } from "react-router-dom";
+
 const Modal = () => {
+  const navigate = useNavigate();
+
   // Modal Context State
   const { modalOpen, pendingAction, hideModal } = useModal();
 
@@ -12,6 +16,7 @@ const Modal = () => {
     // Actually navigate
     pendingAction?.();
     hideModal();
+    //navigate("/users"); // then go to /users
   };
   const onCancel = () => hideModal();
 
