@@ -24,7 +24,7 @@ const EditForm = () => {
   // Get user data from username URI param
   useEffect(() => {
     // Search for user info in the mock data
-    const filteredUserData = users.filter((user) => user.name == username)[0];
+    const filteredUserData = users.filter((user) => user.name === username)[0];
 
     // Update user data
     setUserData(filteredUserData);
@@ -41,7 +41,7 @@ const EditForm = () => {
   // Handle Close
   const handleClose = () => {
     // Open modal on data changed
-    if (userData.name != userName || userData.age != userAge) {
+    if (userData.name !== userName || userData.age !== userAge) {
       setIsModalActive(true);
     } else {
       navigate("/users");
