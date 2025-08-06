@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -32,14 +32,17 @@ const EditForm = () => {
   // Extract confirm/cancel actions from useNavigationBlocker
   // And actually block the navigation attempt (via the custom hook) IF the form is dirty
   const { confirmNavigation, cancelNavigation } = useNavigationBlocker(
-    isDirty,    // because the hook needs to know
-    () => setIsModalOpen(true)    // because the hook needs to be able to display (open) the modal
+    isDirty, // because the hook needs to know
+    () => setIsModalOpen(true), // because the hook needs to be able to display (open) the modal
+    () => setIsModalOpen(false),  // because the hook actions need to close the modal
   );
 
   // Pull the callback functions to the navigation context
-  const {setConfirmNavigation, setCancelNavigation } = useCustomNavigation();
-  setConfirmNavigation(confirmNavigation);
-  setCancelNavigation(cancelNavigation);
+  const { setConfirmNavigation, setCancelNavigation } = useCustomNavigation();
+  useEffect(() => {
+    setConfirmNavigation(() => confirmNavigation);
+    setCancelNavigation(() => cancelNavigation);
+  }, [confirmNavigation, cancelNavigation]);
 
   /*
   useNavigationGuard(isDirty, ({ proceed, reset }) => {

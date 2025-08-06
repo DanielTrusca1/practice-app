@@ -34,10 +34,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ModalProvider>
-      <NavigationProvider>
+    <NavigationProvider>
+      <ModalProvider>
         <RouterProvider router={router}></RouterProvider>
-      </NavigationProvider>
-    </ModalProvider>
+      </ModalProvider>
+    </NavigationProvider>
   </React.StrictMode>
 );

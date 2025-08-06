@@ -1,10 +1,16 @@
 import { createContext, useContext, useState } from "react";
 
-const NavigationContext = createContext();
+// This ensures cancelNavigation is always a function and never undefined
+const NavigationContext = createContext({
+  confirmNavigation: () => {},
+  cancelNavigation: () => {},
+  setConfirmNavigation: () => {},
+  setCancelNavigation: () => {},
+});
 
 export function NavigationProvider({ children }) {
-  const [confirmNavigation, setConfirmNavigation] = useState(null);
-  const [cancelNavigation, setCancelNavigation] = useState(null);
+  const [confirmNavigation, setConfirmNavigation] = useState(() => () => {});
+  const [cancelNavigation, setCancelNavigation] = useState(() => () => {});
 
   return (
     <NavigationContext.Provider
