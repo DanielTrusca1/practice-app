@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
 import { users } from "../MockData";
 
 import { useModal } from "../contexts/ContextModal";
-import { useNavigationGuard } from "../hooks/useNavigationGuard.jsx";
+
+// Custom navigation blocker
+import useNavigationBlocker from "../hooks/useNavigationBlocker";
+
+// Custom navigation context for state
+import { useCustomNavigation } from "../contexts/ContextNavigation";
 
 const EditForm = () => {
   const navigate = useNavigate();
@@ -22,10 +27,21 @@ const EditForm = () => {
       ? false
       : userName != userData.name || userAge != String(userData.age);
 
-  console.log(userData, userName, userAge, isDirty)
+  const { setIsModalOpen } = useModal();
 
-  const { showModal } = useModal();
+  // Extract confirm/cancel actions from useNavigationBlocker
+  // And actually block the navigation attempt (via the custom hook) IF the form is dirty
+  const { confirmNavigation, cancelNavigation } = useNavigationBlocker(
+    isDirty,    // because the hook needs to know
+    () => setIsModalOpen(true)    // because the hook needs to be able to display (open) the modal
+  );
 
+  // Pull the callback functions to the navigation context
+  const {setConfirmNavigation, setCancelNavigation } = useCustomNavigation();
+  setConfirmNavigation(confirmNavigation);
+  setCancelNavigation(cancelNavigation);
+
+  /*
   useNavigationGuard(isDirty, ({ proceed, reset }) => {
     console.log("Guarding");
     showModal(
@@ -33,6 +49,7 @@ const EditForm = () => {
       () => reset()
     );
   });
+  */
 
   // Get user data from username URI param
   useEffect(() => {
