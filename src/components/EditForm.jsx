@@ -12,7 +12,7 @@ import useNavigationBlocker from "../hooks/useNavigationBlocker";
 // Custom navigation context for state
 import { useCustomNavigation } from "../contexts/ContextNavigation";
 
-const EditForm = () => {
+const EditForm = ({ props }) => {
   const navigate = useNavigate();
 
   // Get username from URI param
@@ -22,19 +22,28 @@ const EditForm = () => {
   const [userData, setUserData] = useState(null);
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
-  const isDirty =
-    userData == null || userName === "" || userAge === ""
-      ? false
-      : userName != userData.name || userAge != String(userData.age);
+
+  // On change of input, check if form is dirty and update app state
+  useEffect(() => {
+    if (userData == null || userName == null || userAge == null) return;
+    
+    if (userName !== userData.name || userAge !== String(userData.age))
+      props.setIsFormDirty(true);
+    else props.setIsFormDirty(false);
+
+    console.log("Form is now dirty", props.isFormDirty);
+  }, [userName, userAge]);
 
   const { setIsModalOpen } = useModal();
+
+  const isDirty = false;
 
   // Extract confirm/cancel actions from useNavigationBlocker
   // And actually block the navigation attempt (via the custom hook) IF the form is dirty
   const { confirmNavigation, cancelNavigation } = useNavigationBlocker(
     isDirty, // because the hook needs to know
     () => setIsModalOpen(true), // because the hook needs to be able to display (open) the modal
-    () => setIsModalOpen(false),  // because the hook actions need to close the modal
+    () => setIsModalOpen(false) // because the hook actions need to close the modal
   );
 
   // Pull the callback functions to the navigation context
@@ -43,16 +52,6 @@ const EditForm = () => {
     setConfirmNavigation(() => confirmNavigation);
     setCancelNavigation(() => cancelNavigation);
   }, [confirmNavigation, cancelNavigation]);
-
-  /*
-  useNavigationGuard(isDirty, ({ proceed, reset }) => {
-    console.log("Guarding");
-    showModal(
-      () => proceed(),
-      () => reset()
-    );
-  });
-  */
 
   // Get user data from username URI param
   useEffect(() => {

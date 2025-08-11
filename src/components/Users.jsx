@@ -35,7 +35,7 @@ const Users = ({ props }) => {
           );
         })
       }
-      <Outlet />
+      <Outlet props={props} />
     </div>
   );
 };
