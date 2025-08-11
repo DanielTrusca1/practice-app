@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 
 import { users } from "../MockData";
 
@@ -12,7 +12,9 @@ import useNavigationBlocker from "../hooks/useNavigationBlocker";
 // Custom navigation context for state
 import { useCustomNavigation } from "../contexts/ContextNavigation";
 
-const EditForm = ({ props }) => {
+const EditForm = () => {
+  const props = useOutletContext();
+
   const navigate = useNavigate();
 
   // Get username from URI param
@@ -26,7 +28,7 @@ const EditForm = ({ props }) => {
   // On change of input, check if form is dirty and update app state
   useEffect(() => {
     if (userData == null || userName == null || userAge == null) return;
-    
+
     if (userName !== userData.name || userAge !== String(userData.age))
       props.setIsFormDirty(true);
     else props.setIsFormDirty(false);

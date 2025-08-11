@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-
 // Render child components of the nested routes
 import { Outlet } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 import { users } from "../MockData";
 
-const Users = ({ props }) => {
+const Users = () => {
+  const props = useOutletContext();
+
   const navigate = useNavigate();
 
   const handleSelectUser = (usernameArg) => {
@@ -35,7 +35,7 @@ const Users = ({ props }) => {
           );
         })
       }
-      <Outlet props={props} />
+      <Outlet context={props} />
     </div>
   );
 };

@@ -16,12 +16,14 @@ function App() {
 
   const blocker = useBlocker(shouldBlock);
 
+  const props = {isFormDirty, setIsFormDirty}
+
   return (
     <div className="App">
       <Nav />
 
       <div className="content">
-        <Outlet props={{isFormDirty, setIsFormDirty}}/>
+        <Outlet context={props}/>
       </div>
       <Modal />
     </div>
