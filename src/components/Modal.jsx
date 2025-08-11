@@ -1,28 +1,16 @@
 import { SmallButton } from "../reusable/SmallButton";
 
-import { useModal } from "../contexts/ContextModal";
-
 // Custom navigation context for state
 import { useCustomNavigation } from "../contexts/ContextNavigation";
 
-const Modal = () => {
-  // Should the modal be open ?
-  const { isModalOpen } = useModal();
+const Modal = ({ blocker }) => {
 
   // Modal actions for confirm/cancel
   const { confirmNavigation, cancelNavigation } = useCustomNavigation();
 
-  // Hide modal
-  // if (!isModalOpen) return null;
-
-  const blocker = {
-    state: "",
-  };
-
   return (
     <>
-      {
-        blocker.state === "blocked" && 
+      {blocker.state === "blocked" && (
         <div className="modal-background">
           <div className="confirmation-modal">
             <p>You have unsaved changes to the user form.</p>
@@ -46,7 +34,7 @@ const Modal = () => {
             </div>
           </div>
         </div>
-      }
+      )}
     </>
   );
 };

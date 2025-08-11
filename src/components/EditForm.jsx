@@ -29,11 +29,18 @@ const EditForm = () => {
   useEffect(() => {
     if (userData == null || userName == null || userAge == null) return;
 
-    if (userName !== userData.name || userAge !== String(userData.age))
-      props.setIsFormDirty(true);
-    else props.setIsFormDirty(false);
+    // console.log(userData.name, userName, userData.age, userAge);
 
-    console.log("Form is now dirty", props.isFormDirty);
+    if (
+      userName !== userData.name ||
+      String(userAge) !== String(userData.age)
+    ) {
+      props.setIsFormDirty(true);
+      console.log("The form is dirty");
+    } else {
+      props.setIsFormDirty(false);
+      console.log("The form is clean");
+    }
   }, [userName, userAge]);
 
   const { setIsModalOpen } = useModal();

@@ -12,20 +12,24 @@ import Nav from "./components/Nav";
 function App() {
   const [isFormDirty, setIsFormDirty] = useState("");
 
-  const shouldBlock = useCallback(({ currentLocation, nextLocation }) => {});
+  const shouldBlock = useCallback(
+    ({ currentLocation, nextLocation }) =>
+      isFormDirty && currentLocation.pathname !== nextLocation.pathname,
+    [isFormDirty]
+  );
 
   const blocker = useBlocker(shouldBlock);
 
-  const props = {isFormDirty, setIsFormDirty}
+  const props = { isFormDirty, setIsFormDirty };
 
   return (
     <div className="App">
       <Nav />
 
       <div className="content">
-        <Outlet context={props}/>
+        <Outlet context={props} />
       </div>
-      <Modal />
+      <Modal blocker={blocker}/>
     </div>
   );
 }
