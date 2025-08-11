@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import { users } from "../MockData";
 
-const Users = () => {
+const Users = ({ props }) => {
   const navigate = useNavigate();
 
   const handleSelectUser = (usernameArg) => {
