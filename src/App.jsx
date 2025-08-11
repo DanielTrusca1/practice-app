@@ -29,7 +29,7 @@ function App() {
       <div className="content">
         <Outlet context={props} />
       </div>
-      <Modal blocker={blocker}/>
+      <Modal blocker={blocker} setIsFormDirty={setIsFormDirty}/>
     </div>
   );
 }

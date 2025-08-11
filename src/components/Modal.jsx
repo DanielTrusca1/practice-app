@@ -1,13 +1,6 @@
 import { SmallButton } from "../reusable/SmallButton";
 
-// Custom navigation context for state
-import { useCustomNavigation } from "../contexts/ContextNavigation";
-
-const Modal = ({ blocker }) => {
-
-  // Modal actions for confirm/cancel
-  const { confirmNavigation, cancelNavigation } = useCustomNavigation();
-
+const Modal = ({ blocker, setIsFormDirty }) => {
   return (
     <>
       {blocker.state === "blocked" && (
@@ -18,14 +11,16 @@ const Modal = ({ blocker }) => {
             <div className="row-flex-container">
               <SmallButton
                 onClick={() => {
-                  cancelNavigation();
+                  blocker.reset();
+                  
                 }}
               >
                 Cancel
               </SmallButton>
               <SmallButton
                 onClick={() => {
-                  confirmNavigation();
+                  blocker.proceed();
+                  setIsFormDirty(false);
                 }}
                 $variant="danger"
               >
