@@ -3,7 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 
 // React Router DOM
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 
 import { ModalProvider } from "./contexts/ContextModal";
 import { NavigationProvider } from "./contexts/ContextNavigation";
@@ -15,6 +19,21 @@ import About from "./components/About";
 import Users from "./components/Users";
 import EditForm from "./components/EditForm";
 
+import { Route } from "react-router-dom";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="home" element={<Home />} />
+      <Route path="about" element={<About />} />
+      <Route path="users" element={<Users />}>
+        <Route path=":username" element={<EditForm />} />
+      </Route>
+    </Route>
+  )
+);
+
+/*
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +49,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+*/
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

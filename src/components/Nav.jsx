@@ -9,7 +9,7 @@ const Nav = () => {
 
   return (
     <div className="nav">
-      <Button onClick={() => navigate("/")}>Home</Button>
+      <Button onClick={() => navigate("/home")}>Home</Button>
       <Button onClick={() => navigate("/about")}>About</Button>
       <Button onClick={() => navigate("/users")}>Users</Button>
     </div>
