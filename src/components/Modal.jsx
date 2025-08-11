@@ -1,6 +1,11 @@
 import { SmallButton } from "../reusable/SmallButton";
 
+import { useNavigate } from "react-router-dom";
+
 const Modal = ({ blocker, setIsFormDirty }) => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       {blocker.state === "blocked" && (
@@ -21,6 +26,7 @@ const Modal = ({ blocker, setIsFormDirty }) => {
                 onClick={() => {
                   blocker.proceed();
                   setIsFormDirty(false);
+                  navigate(0);
                 }}
                 $variant="danger"
               >

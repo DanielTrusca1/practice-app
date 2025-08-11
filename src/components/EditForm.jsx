@@ -6,9 +6,6 @@ import { users } from "../MockData";
 
 import { useModal } from "../contexts/ContextModal";
 
-// Custom navigation blocker
-import useNavigationBlocker from "../hooks/useNavigationBlocker";
-
 // Custom navigation context for state
 import { useCustomNavigation } from "../contexts/ContextNavigation";
 
@@ -42,25 +39,6 @@ const EditForm = () => {
       console.log("The form is clean");
     }
   }, [userName, userAge]);
-
-  const { setIsModalOpen } = useModal();
-
-  const isDirty = false;
-
-  // Extract confirm/cancel actions from useNavigationBlocker
-  // And actually block the navigation attempt (via the custom hook) IF the form is dirty
-  const { confirmNavigation, cancelNavigation } = useNavigationBlocker(
-    isDirty, // because the hook needs to know
-    () => setIsModalOpen(true), // because the hook needs to be able to display (open) the modal
-    () => setIsModalOpen(false) // because the hook actions need to close the modal
-  );
-
-  // Pull the callback functions to the navigation context
-  const { setConfirmNavigation, setCancelNavigation } = useCustomNavigation();
-  useEffect(() => {
-    setConfirmNavigation(() => confirmNavigation);
-    setCancelNavigation(() => cancelNavigation);
-  }, [confirmNavigation, cancelNavigation]);
 
   // Get user data from username URI param
   useEffect(() => {

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Button } from "../reusable/Button";
 
 import { useNavigate } from "react-router-dom";
