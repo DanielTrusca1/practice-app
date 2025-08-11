@@ -47,7 +47,7 @@ const EditForm = () => {
 
     // Update user data
     setUserData(filteredUserData);
-  }, []);
+  }, [username]);
 
   // Update user edit form fields on user data change
   useEffect(() => {

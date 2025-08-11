@@ -13,7 +13,6 @@ const Users = () => {
   const handleSelectUser = (usernameArg) => {
     // Navigate to the user profile edit form route
     navigate(`/users/${usernameArg}`);
-    navigate(0);
   };
 
   return (
