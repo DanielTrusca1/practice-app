@@ -4,11 +4,6 @@ import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 
 import { users } from "../MockData";
 
-import { useModal } from "../contexts/ContextModal";
-
-// Custom navigation context for state
-import { useCustomNavigation } from "../contexts/ContextNavigation";
-
 const EditForm = () => {
   const props = useOutletContext();
 
