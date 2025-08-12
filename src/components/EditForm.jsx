@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-import { useNavigate, useParams, useOutletContext } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { useBlocker } from "react-router";
 
 import { users } from "../MockData";
 
-const EditForm = () => {
-  const props = useOutletContext();
+import Modal from "../components/Modal";
 
+const EditForm = () => {
   const navigate = useNavigate();
 
   // Get username from URI param
   const { username } = useParams();
+
+  // Confirmation modal logic & state
+  const [isFormDirty, setIsFormDirty] = useState("");
+
+  const shouldBlock = useCallback(
+    ({ currentLocation, nextLocation }) =>
+      isFormDirty && currentLocation.pathname !== nextLocation.pathname,
+    [isFormDirty]
+  );
+
+  const blocker = useBlocker(shouldBlock);
 
   // User Form Data
   const [userData, setUserData] = useState(null);
@@ -23,14 +36,11 @@ const EditForm = () => {
 
     // console.log(userData.name, userName, userData.age, userAge);
 
-    if (
-      userName !== userData.name ||
-      userAge !== userData.age
-    ) {
-      props.setIsFormDirty(true);
+    if (userName !== userData.name || userAge !== userData.age) {
+      setIsFormDirty(true);
       console.log("The form is dirty");
     } else {
-      props.setIsFormDirty(false);
+      setIsFormDirty(false);
       console.log("The form is clean");
     }
   }, [userName, userAge]);
@@ -73,6 +83,8 @@ const EditForm = () => {
         onChange={(e) => setUserAge(Number(e.target.value))}
       />
       <button onClick={handleClose}>x</button>
+
+      <Modal blocker={blocker} setIsFormDirty={setIsFormDirty} />
     </div>
   );
 };

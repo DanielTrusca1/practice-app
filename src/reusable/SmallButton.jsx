@@ -15,8 +15,8 @@ export const SmallButton = styled(BaseButton)`
   ${(props) =>
     props.$variant === "danger" &&
     css`
-      background: rgba(200, 50, 50, 1);
-      color: white;
+      background: rgba(200, 50, 50, 1) !important;
+      color: white !important;
       &:hover {
         background: rgba(170, 30, 30, 1);
       }
