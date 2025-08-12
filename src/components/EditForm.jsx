@@ -15,7 +15,7 @@ const EditForm = () => {
   // User Form Data
   const [userData, setUserData] = useState(null);
   const [userName, setUserName] = useState("");
-  const [userAge, setUserAge] = useState("");
+  const [userAge, setUserAge] = useState(0);
 
   // On change of input, check if form is dirty and update app state
   useEffect(() => {
@@ -25,7 +25,7 @@ const EditForm = () => {
 
     if (
       userName !== userData.name ||
-      String(userAge) !== String(userData.age)
+      userAge !== userData.age
     ) {
       props.setIsFormDirty(true);
       console.log("The form is dirty");
@@ -70,7 +70,7 @@ const EditForm = () => {
       <input
         type="text"
         value={userAge}
-        onChange={(e) => setUserAge(e.target.value)}
+        onChange={(e) => setUserAge(Number(e.target.value))}
       />
       <button onClick={handleClose}>x</button>
     </div>
